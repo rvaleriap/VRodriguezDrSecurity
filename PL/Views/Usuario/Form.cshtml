@@ -1,0 +1,147 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2> Formulario</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdUsuario, new { @class = "hidden" })
+
+                        @Html.TextBoxFor(model => model.IdUsuario, new { @class = "hidden form-control" })
+                        @Html.ValidationMessageFor(model => model.IdUsuario)
+                        @*hidden*@
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Nombre)
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @name = "txtNombre" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.ApellidoPaterno)
+                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno" })
+                        @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.ApellidoMaterno)
+                        @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" })
+                        @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.FechaNacimiento)
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa-solid fa-at"></i> </span>
+                                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @id = "txtFechaNacimiento" })
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Sexo)
+                        @Html.TextBoxFor(model => model.Sexo, new { @class = "form-control", @id = "txtSexo" })
+                        @Html.ValidationMessageFor(model => model.Sexo)
+                    </div>
+
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.CURP)
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-mobile-retro"></i></span>
+                            @Html.TextBoxFor(model => model.CURP, new { @class = "form-control", @id = "txtCurp" })
+                            @Html.ValidationMessageFor(model => model.CURP)
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Telefono)
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-mobile-retro"></i></span>
+                            @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono" })
+                            @Html.ValidationMessageFor(model => model.Telefono)
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.EstadoNacimiento)
+                        @Html.TextBoxFor(model => model.EstadoNacimiento, new { @class = "form-control", @id = "txtEstadoNacimiento" })
+                        @Html.ValidationMessageFor(model => model.EstadoNacimiento)
+                    </div>
+
+                </div>
+                <br />
+
+            </div>
+            <br />
+            <div class="row">
+
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Direccion.Calle)
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-mobile-retro"></i></span>
+                        @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control", @id = "txtCalle" })
+                        @Html.ValidationMessageFor(model => model.Direccion.Calle)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Direccion.Colonia)
+                    @Html.TextBoxFor(model => model.Direccion.Colonia, new { @class = "form-control", @id = "txtColonia" })
+                    @Html.ValidationMessageFor(model => model.Direccion.Colonia)
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Direccion.Estado)
+                    @Html.TextBoxFor(model => model.Direccion.Estado, new { @class = "form-control", @id = "txtEstado" })
+                    @Html.ValidationMessageFor(model => model.Direccion.Estado)
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Direccion.Municipio)
+                    @Html.TextBoxFor(model => model.Direccion.Municipio, new { @class = "form-control", @id = "txtMunicipio" })
+                    @Html.ValidationMessageFor(model => model.Direccion.Municipio)
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Direccion.Numero)
+                    @Html.TextBoxFor(model => model.Direccion.Numero, new { @class = "form-control", @id = "txtNumero" })
+                    @Html.ValidationMessageFor(model => model.Direccion.Numero)
+                </div>
+            </div>
+            <br />
+
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    <button type="" id="generar">Generar CURP</button><br><br>
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    @Html.ActionLink("Regresar", "GetAll", "Usuario", htmlAttributes: new { @class = "btn btn-danger" })
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+
+    </script>
+
+}
+
+
