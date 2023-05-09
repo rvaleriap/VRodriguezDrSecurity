@@ -186,7 +186,57 @@ namespace BL
             }
             return result;
         }
+        public static ML.Result CURP(ML.Usuario usuario)
+        {
+            var sex = Genres.Male;
+            var estado = Estado(usuario.Direccion.Estado);
 
-   
+            ML.Result result = new ML.Result();
+            switch (usuario.Sexo.ToString())
+            {
+                case "H":
+                    sex = Genres.Male;
+                    break;
+                case "M":
+                    sex = Genres.Female;
+                    break;
+                default:
+                    break;
+            }
+            string curp = CurpClass.CreateCURP(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno
+                , DateTime.ParseExact(usuario.FechaNacimiento, "dd/MM/yyyy", null), sex, estado);
+            if (curp != null)
+            {
+                result.Message = curp;
+                result.Correct = true;
+            }
+            else
+            {
+
+                result.Correct = false;
+            }
+            return result;
+        }
+
+        public static FederalEntities Estado(string estado)
+        {
+            var entidad = FederalEntities.Mexico;
+            switch (estado)
+            {
+                case "Mexico":
+                    entidad = FederalEntities.Mexico;
+                    break;
+                case "Nacido en el extranjero":
+                    entidad = FederalEntities.NacidoExtranjero;
+                    break;
+                case "Nuevo Leon":
+                    entidad = FederalEntities.NuevoLeon;
+                    break;
+            }
+
+            return entidad;
+        }
+
+
     }
 }

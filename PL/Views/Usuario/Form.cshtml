@@ -25,7 +25,7 @@
                         @Html.LabelFor(model => model.Nombre)
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
-                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @name = "txtNombre" })
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombres" })
                             @Html.ValidationMessageFor(model => model.Nombre)
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                             @Html.LabelFor(model => model.FechaNacimiento)
                             <div class="input-group">
                                 <span class="input-group-addon"> <i class="fa-solid fa-at"></i> </span>
-                                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @id = "txtFechaNacimiento" })
+                                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @id = "FechaNacimiento" })
 
                             </div>
 
@@ -57,21 +57,41 @@
                 <br />
 
                 <div class="row">
-                    <div class="col-md-3">
-                        @Html.LabelFor(model => model.Sexo)
-                        @Html.TextBoxFor(model => model.Sexo, new { @class = "form-control", @id = "txtSexo" })
-                        @Html.ValidationMessageFor(model => model.Sexo)
-                    </div>
-
-
-                    <div class="col-md-3">
-                        @Html.LabelFor(model => model.CURP)
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-mobile-retro"></i></span>
-                            @Html.TextBoxFor(model => model.CURP, new { @class = "form-control", @id = "txtCurp" })
-                            @Html.ValidationMessageFor(model => model.CURP)
+                   
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Sexo)
+                            @{
+                                List<SelectListItem> Generos = new List<SelectListItem>();
+                                Generos.Add(new SelectListItem
+                                {
+                                    Text = "Hombre",
+                                    Value = "H"
+                                });
+                                Generos.Add(new SelectListItem
+                                {
+                                    Text = "Mujer",
+                                    Value = "M",
+                                });
+                            }
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa-solid fa-venus-mars"></i> </span>
+                                @Html.DropDownListFor(model => model.Sexo, Generos, "Seleccione el sexo", new { @class = "form-control", @id = "txtSexo" })
+                                @Html.ValidationMessageFor(model => model.Sexo)
+                            </div>
                         </div>
-                    </div>
+                 
+
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.CURP)
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa-solid fa-phone"></i> </span>
+                                @Html.TextBoxFor(model => model.CURP, new { @class = "form-control", @id = "txtCurp" })
+
+                            </div>
+                        </div>
+                 
+
 
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.Telefono)
@@ -107,16 +127,41 @@
                     @Html.TextBoxFor(model => model.Direccion.Colonia, new { @class = "form-control", @id = "txtColonia" })
                     @Html.ValidationMessageFor(model => model.Direccion.Colonia)
                 </div>
+
                 <div class="col-md-3">
                     @Html.LabelFor(model => model.Direccion.Estado)
-                    @Html.TextBoxFor(model => model.Direccion.Estado, new { @class = "form-control", @id = "txtEstado" })
-                    @Html.ValidationMessageFor(model => model.Direccion.Estado)
+                    @{
+                        List<SelectListItem> Estados = new List<SelectListItem>();
+                        Estados.Add(new SelectListItem
+                        {
+                            Text = "Mexico",
+                            Value = "Mexico"
+                        });
+                        Estados.Add(new SelectListItem
+                        {
+                            Text = "Nacido en el extranjero",
+                            Value = "Nacido en el extranjero",
+                        });
+                        Estados.Add(new SelectListItem
+                        {
+                            Text = "Nuevo Leon",
+                            Value = "Nuevo Leon",
+                        });
+                    }
+                    <div class="input-group">
+                        <span class="input-group-addon"> <i class="fa-solid fa-venus-mars"></i> </span>
+                        @Html.DropDownListFor(model => model.Direccion.Estado, Estados, "Seleccione el estado", new { @class = "form-control", @id = "txtEstado" })
+
+                    </div>
                 </div>
+
                 <div class="col-md-3">
                     @Html.LabelFor(model => model.Direccion.Municipio)
                     @Html.TextBoxFor(model => model.Direccion.Municipio, new { @class = "form-control", @id = "txtMunicipio" })
                     @Html.ValidationMessageFor(model => model.Direccion.Municipio)
                 </div>
+                <br />
+                <br />
                 <div class="col-md-3">
                     @Html.LabelFor(model => model.Direccion.Numero)
                     @Html.TextBoxFor(model => model.Direccion.Numero, new { @class = "form-control", @id = "txtNumero" })
@@ -125,11 +170,16 @@
             </div>
             <br />
 
-
-            <div class="form-group">
+            <div class="row">
                 <div class="col-md-3">
-                    <button type="" id="generar">Generar CURP</button><br><br>
-                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    <div class="input-group">
+                        <a class="btn btn-info" onclick="curp()">Generar Curp</a>
+                        <button type="submit" value="Guardar" class="btn btn-success">   Guardar </button>
+
+
+                    </div>
+                </div>
+                <div class="col-md-3">
                     @Html.ActionLink("Regresar", "GetAll", "Usuario", htmlAttributes: new { @class = "btn btn-danger" })
                 </div>
             </div>
@@ -137,11 +187,36 @@
         }
     </div>
 </div>
+
+
+
 @section Scripts{
     <script type="text/javascript">
+        function curp() {
+    $.ajax({
+                type: 'Post',
+                url: '@Url.Action("CURP")',
+                dataType: 'json',
+        data: {
+            Nombre: $("#txtNombres").val(),
+            ApellidoPaterno: $("#txtApellidoPaterno").val(),
+            ApellidoMaterno: $("#txtApellidoMaterno").val(),
+            FechaNacimiento: $("#FechaNacimiento").val(),
+            Sexo: $("#txtSexo").val(),
+            Direccion: { Estado: $("#txtEstado").val() }
 
+
+        },
+        success: function (object) {
+            $("#txtCurp").val(object.Message);
+                },
+                error: function (ex) {
+                    alert('Failed.' + ex);
+                }
+
+            });
+        }
     </script>
 
 }
-
 

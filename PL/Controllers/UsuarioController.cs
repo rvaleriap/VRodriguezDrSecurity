@@ -101,7 +101,12 @@ namespace PL.Controllers
                 return View("Modal");
             }
         }
-     
+        [HttpPost]
+        public JsonResult CURP(ML.Usuario usuario)
+        {
+            ML.Result result = BL.Usuario.CURP(usuario);
+            return Json(result);
+        }
     }
          
 
